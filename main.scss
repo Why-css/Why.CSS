@@ -1,0 +1,6 @@
+@use "fmt";
+
+@func main() {
+  $greeting = "Hello world";
+  @import fmt.println($greeting);
+}

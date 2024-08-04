@@ -5,7 +5,7 @@
 
 @func main() {
   $greeting = "Hello world";
-  @import fmt.print-ln($greeting);
+  @import fmt.println($greeting);
 }
 ```
 
