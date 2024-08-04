@@ -1,5 +1,5 @@
-![WhatTheCSS](https://github.com/user-attachments/assets/d8275741-b0cc-4ea4-9fa2-a5b5daaec52d)
+![Why.CSS](https://github.com/user-attachments/assets/855ad945-b558-4603-8b56-3788c99d699e)
 
-## What is WhatTheCSS?
+## What is Why.CSS?
 
-WhatTheCSS is a new way to use scss as a general purpose language
+Why.CSS is a new way to use scss as a general-purpose programming language
