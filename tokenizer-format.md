@@ -18,6 +18,9 @@
 
 ### Variable
 
+- variable name can only contain alphabetical characters
+- variables can only store strings
+
 ```json
 {
   "type": "VariableDeclaration",
