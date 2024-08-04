@@ -1,0 +1,34 @@
+[
+  {
+    "type": "FunctionCall",
+    "value": "@import"
+  },
+  {
+    "type": "name",
+    "value": "fmt"
+  },
+  {
+    "type": "dot",
+    "value": "."
+  },
+  {
+    "type": "name",
+    "value": "println"
+  },
+  {
+    "type": "parentheses",
+    "value": "("
+  },
+  {
+    "type": "string",
+    "value": "\"Hello, World!\""
+  },
+  {
+    "type": "parentheses",
+    "value": ")"
+  },
+  {
+    "type": "semicolon",
+    "value": ";"
+  }
+]

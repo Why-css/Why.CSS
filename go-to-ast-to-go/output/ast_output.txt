@@ -53,52 +53,81 @@
     52  .  .  .  }
     53  .  .  .  Body: *ast.BlockStmt {
     54  .  .  .  .  Lbrace: ./example/example.go:5:13
-    55  .  .  .  .  List: []ast.Stmt (len = 1) {
-    56  .  .  .  .  .  0: *ast.ExprStmt {
-    57  .  .  .  .  .  .  X: *ast.CallExpr {
-    58  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
-    59  .  .  .  .  .  .  .  .  X: *ast.Ident {
-    60  .  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:6:2
-    61  .  .  .  .  .  .  .  .  .  Name: "fmt"
-    62  .  .  .  .  .  .  .  .  .  Obj: nil
-    63  .  .  .  .  .  .  .  .  }
-    64  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
-    65  .  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:6:6
-    66  .  .  .  .  .  .  .  .  .  Name: "Println"
-    67  .  .  .  .  .  .  .  .  .  Obj: nil
-    68  .  .  .  .  .  .  .  .  }
-    69  .  .  .  .  .  .  .  }
-    70  .  .  .  .  .  .  .  Lparen: ./example/example.go:6:13
-    71  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
-    72  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
-    73  .  .  .  .  .  .  .  .  .  ValuePos: ./example/example.go:6:14
-    74  .  .  .  .  .  .  .  .  .  Kind: STRING
-    75  .  .  .  .  .  .  .  .  .  Value: "\"Hello, World!\""
-    76  .  .  .  .  .  .  .  .  }
+    55  .  .  .  .  List: []ast.Stmt (len = 2) {
+    56  .  .  .  .  .  0: *ast.AssignStmt {
+    57  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    58  .  .  .  .  .  .  .  0: *ast.Ident {
+    59  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:6:2
+    60  .  .  .  .  .  .  .  .  Name: "greeting"
+    61  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    62  .  .  .  .  .  .  .  .  .  Kind: var
+    63  .  .  .  .  .  .  .  .  .  Name: "greeting"
+    64  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 56)
+    65  .  .  .  .  .  .  .  .  .  Data: nil
+    66  .  .  .  .  .  .  .  .  .  Type: nil
+    67  .  .  .  .  .  .  .  .  }
+    68  .  .  .  .  .  .  .  }
+    69  .  .  .  .  .  .  }
+    70  .  .  .  .  .  .  TokPos: ./example/example.go:6:11
+    71  .  .  .  .  .  .  Tok: :=
+    72  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    73  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    74  .  .  .  .  .  .  .  .  ValuePos: ./example/example.go:6:14
+    75  .  .  .  .  .  .  .  .  Kind: STRING
+    76  .  .  .  .  .  .  .  .  Value: "\"Hello, World!\""
     77  .  .  .  .  .  .  .  }
-    78  .  .  .  .  .  .  .  Ellipsis: -
-    79  .  .  .  .  .  .  .  Rparen: ./example/example.go:6:29
-    80  .  .  .  .  .  .  }
-    81  .  .  .  .  .  }
-    82  .  .  .  .  }
-    83  .  .  .  .  Rbrace: ./example/example.go:7:1
-    84  .  .  .  }
-    85  .  .  }
-    86  .  }
-    87  .  FileStart: ./example/example.go:1:1
-    88  .  FileEnd: ./example/example.go:7:4
-    89  .  Scope: *ast.Scope {
-    90  .  .  Outer: nil
-    91  .  .  Objects: map[string]*ast.Object (len = 1) {
-    92  .  .  .  "main": *(obj @ 35)
-    93  .  .  }
-    94  .  }
-    95  .  Imports: []*ast.ImportSpec (len = 1) {
-    96  .  .  0: *(obj @ 15)
-    97  .  }
-    98  .  Unresolved: []*ast.Ident (len = 1) {
-    99  .  .  0: *(obj @ 59)
-   100  .  }
-   101  .  Comments: nil
-   102  .  GoVersion: ""
-   103  }
+    78  .  .  .  .  .  .  }
+    79  .  .  .  .  .  }
+    80  .  .  .  .  .  1: *ast.ExprStmt {
+    81  .  .  .  .  .  .  X: *ast.CallExpr {
+    82  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    83  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    84  .  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:7:2
+    85  .  .  .  .  .  .  .  .  .  Name: "fmt"
+    86  .  .  .  .  .  .  .  .  .  Obj: nil
+    87  .  .  .  .  .  .  .  .  }
+    88  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    89  .  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:7:6
+    90  .  .  .  .  .  .  .  .  .  Name: "Println"
+    91  .  .  .  .  .  .  .  .  .  Obj: nil
+    92  .  .  .  .  .  .  .  .  }
+    93  .  .  .  .  .  .  .  }
+    94  .  .  .  .  .  .  .  Lparen: ./example/example.go:7:13
+    95  .  .  .  .  .  .  .  Args: []ast.Expr (len = 2) {
+    96  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    97  .  .  .  .  .  .  .  .  .  NamePos: ./example/example.go:7:14
+    98  .  .  .  .  .  .  .  .  .  Name: "greeting"
+    99  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 61)
+   100  .  .  .  .  .  .  .  .  }
+   101  .  .  .  .  .  .  .  .  1: *ast.BasicLit {
+   102  .  .  .  .  .  .  .  .  .  ValuePos: ./example/example.go:7:24
+   103  .  .  .  .  .  .  .  .  .  Kind: STRING
+   104  .  .  .  .  .  .  .  .  .  Value: "\"From CSS??\""
+   105  .  .  .  .  .  .  .  .  }
+   106  .  .  .  .  .  .  .  }
+   107  .  .  .  .  .  .  .  Ellipsis: -
+   108  .  .  .  .  .  .  .  Rparen: ./example/example.go:7:36
+   109  .  .  .  .  .  .  }
+   110  .  .  .  .  .  }
+   111  .  .  .  .  }
+   112  .  .  .  .  Rbrace: ./example/example.go:8:1
+   113  .  .  .  }
+   114  .  .  }
+   115  .  }
+   116  .  FileStart: ./example/example.go:1:1
+   117  .  FileEnd: ./example/example.go:8:4
+   118  .  Scope: *ast.Scope {
+   119  .  .  Outer: nil
+   120  .  .  Objects: map[string]*ast.Object (len = 1) {
+   121  .  .  .  "main": *(obj @ 35)
+   122  .  .  }
+   123  .  }
+   124  .  Imports: []*ast.ImportSpec (len = 1) {
+   125  .  .  0: *(obj @ 15)
+   126  .  }
+   127  .  Unresolved: []*ast.Ident (len = 1) {
+   128  .  .  0: *(obj @ 83)
+   129  .  }
+   130  .  Comments: nil
+   131  .  GoVersion: ""
+   132  }

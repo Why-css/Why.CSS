@@ -1,0 +1,25 @@
+[
+  { "at": "use" },
+  { "string": "fmt" },
+  { "end": ";" },
+
+  { "at": "func" },
+  { "name": "main" },
+  { "paren": "(" },
+  { "paren": ")" },
+  { "brace": "{" },
+
+  { "variable": "greeting" },
+  { "equal": "=" },
+  { "string": "Hello world" },
+  { "end": ";" },
+
+  { "at": "import" },
+  { "name": "fmt.println" },
+  { "paren": "(" },
+  { "variable": "greeting" },
+  { "paren": ")" },
+  { "end": ";" },
+
+  { "brace": "}" }
+]

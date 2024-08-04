@@ -1,0 +1,35 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "value": "fmt"
+    },
+    {
+      "type": "FunctionDeclaration",
+      "name": "main",
+      "args": [],
+      "body": [
+        {
+          "type": "VariableDeclaration",
+          "name": "greeting",
+          "value": "Hello world"
+        },
+        {
+          "type": "FunctionCall",
+          "name": "fmt.println",
+          "args": [
+            {
+              "type": "VariableCall",
+              "name": "greeting"
+            },
+            {
+              "type": "StringLiteral",
+              "value": "From CSS"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -3,5 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello, World!")
+	greeting := "Hello, World!"
+	fmt.Println(greeting, "From CSS??")
 }

@@ -1,0 +1,8 @@
+[
+  { "at": "import" },
+  { "name": "fmt.println" },
+  { "paren": "(" },
+  { "string": "Hello world" },
+  { "paren": ")" },
+  { "end": ";" }
+]
