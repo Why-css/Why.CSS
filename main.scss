@@ -1,8 +1,6 @@
-```scss
 @use "fmt";
 
-@mixin main() {
+@func main() {
   $greeting = "Hello world";
   @import fmt.println($greeting);
 }
-```
