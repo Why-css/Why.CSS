@@ -132,22 +132,10 @@ func main() {
 	}
 }
 
-// createHelloWorldAST creates the AST for a "Hello, World!" program
 func createHelloWorldAST() *ast.File {
-	// Create package declaration
 	pkg := &ast.Ident{Name: "main"}
 
-	// TODO create function for this
-	importSpec := &ast.ImportSpec{
-		Path: &ast.BasicLit{
-			Kind:  token.STRING,
-			Value: `"fmt"`,
-		},
-	}
-	importDecl := &ast.GenDecl{
-		Tok:   token.IMPORT,
-		Specs: []ast.Spec{importSpec},
-	}
+	importDecl := getImportDeclaration("fmt")
 
 	varDecl := getStringVariableDeclaration("greet", "Hello, World!")
 
@@ -159,7 +147,6 @@ func createHelloWorldAST() *ast.File {
 		}),
 	}))
 
-	// Create the file node
 	file := &ast.File{
 		Name:  pkg,
 		Decls: []ast.Decl{importDecl, mainFunc},
@@ -222,5 +209,18 @@ func getStringVariableDeclaration(name string, value string) *ast.GenDecl {
 	return &ast.GenDecl{
 		Tok:   token.VAR,
 		Specs: []ast.Spec{variable},
+	}
+}
+
+func getImportDeclaration(path string) *ast.GenDecl {
+	importSpec := &ast.ImportSpec{
+		Path: &ast.BasicLit{
+			Kind:  token.STRING,
+			Value: "\"" + path + "\"",
+		},
+	}
+	return &ast.GenDecl{
+		Tok:   token.IMPORT,
+		Specs: []ast.Spec{importSpec},
 	}
 }
