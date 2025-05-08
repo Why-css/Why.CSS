@@ -33,35 +33,39 @@ var SimpleLangParserStaticData struct {
 func simplelangParserInit() {
 	staticData := &SimpleLangParserStaticData
 	staticData.LiteralNames = []string{
-		"", "'='", "';'", "'print'", "'('", "')'", "'*'", "'/'", "'+'", "'-'",
+		"", "'@use'", "'\"'", "';'", "'='", "'print'", "'('", "')'", "'*'",
+		"'/'", "'+'", "'-'",
 	}
 	staticData.SymbolicNames = []string{
-		"", "", "", "", "", "", "", "", "", "", "ID", "INT", "WS",
+		"", "", "", "", "", "", "", "", "", "", "", "", "ID", "INT", "IMPORTNAMES",
+		"WS",
 	}
 	staticData.RuleNames = []string{
 		"program", "statement", "expression",
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 12, 45, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 1, 0, 4, 0, 8, 8, 0,
+		4, 1, 15, 50, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 1, 0, 4, 0, 8, 8, 0,
 		11, 0, 12, 0, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 1, 1, 1, 3, 1, 23, 8, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 3,
-		2, 32, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 5, 2, 40, 8, 2, 10, 2,
-		12, 2, 43, 9, 2, 1, 2, 0, 1, 4, 3, 0, 2, 4, 0, 2, 1, 0, 6, 7, 1, 0, 8,
-		9, 47, 0, 7, 1, 0, 0, 0, 2, 22, 1, 0, 0, 0, 4, 31, 1, 0, 0, 0, 6, 8, 3,
-		2, 1, 0, 7, 6, 1, 0, 0, 0, 8, 9, 1, 0, 0, 0, 9, 7, 1, 0, 0, 0, 9, 10, 1,
-		0, 0, 0, 10, 1, 1, 0, 0, 0, 11, 12, 5, 10, 0, 0, 12, 13, 5, 1, 0, 0, 13,
-		14, 3, 4, 2, 0, 14, 15, 5, 2, 0, 0, 15, 23, 1, 0, 0, 0, 16, 17, 5, 3, 0,
-		0, 17, 18, 5, 4, 0, 0, 18, 19, 3, 4, 2, 0, 19, 20, 5, 5, 0, 0, 20, 21,
-		5, 2, 0, 0, 21, 23, 1, 0, 0, 0, 22, 11, 1, 0, 0, 0, 22, 16, 1, 0, 0, 0,
-		23, 3, 1, 0, 0, 0, 24, 25, 6, 2, -1, 0, 25, 32, 5, 11, 0, 0, 26, 32, 5,
-		10, 0, 0, 27, 28, 5, 4, 0, 0, 28, 29, 3, 4, 2, 0, 29, 30, 5, 5, 0, 0, 30,
-		32, 1, 0, 0, 0, 31, 24, 1, 0, 0, 0, 31, 26, 1, 0, 0, 0, 31, 27, 1, 0, 0,
-		0, 32, 41, 1, 0, 0, 0, 33, 34, 10, 5, 0, 0, 34, 35, 7, 0, 0, 0, 35, 40,
-		3, 4, 2, 6, 36, 37, 10, 4, 0, 0, 37, 38, 7, 1, 0, 0, 38, 40, 3, 4, 2, 5,
-		39, 33, 1, 0, 0, 0, 39, 36, 1, 0, 0, 0, 40, 43, 1, 0, 0, 0, 41, 39, 1,
-		0, 0, 0, 41, 42, 1, 0, 0, 0, 42, 5, 1, 0, 0, 0, 43, 41, 1, 0, 0, 0, 5,
-		9, 22, 31, 39, 41,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 28, 8, 1, 1, 2, 1, 2, 1,
+		2, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 37, 8, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+		1, 2, 5, 2, 45, 8, 2, 10, 2, 12, 2, 48, 9, 2, 1, 2, 0, 1, 4, 3, 0, 2, 4,
+		0, 2, 1, 0, 8, 9, 1, 0, 10, 11, 53, 0, 7, 1, 0, 0, 0, 2, 27, 1, 0, 0, 0,
+		4, 36, 1, 0, 0, 0, 6, 8, 3, 2, 1, 0, 7, 6, 1, 0, 0, 0, 8, 9, 1, 0, 0, 0,
+		9, 7, 1, 0, 0, 0, 9, 10, 1, 0, 0, 0, 10, 1, 1, 0, 0, 0, 11, 12, 5, 1, 0,
+		0, 12, 13, 5, 2, 0, 0, 13, 14, 5, 14, 0, 0, 14, 15, 5, 2, 0, 0, 15, 28,
+		5, 3, 0, 0, 16, 17, 5, 12, 0, 0, 17, 18, 5, 4, 0, 0, 18, 19, 3, 4, 2, 0,
+		19, 20, 5, 3, 0, 0, 20, 28, 1, 0, 0, 0, 21, 22, 5, 5, 0, 0, 22, 23, 5,
+		6, 0, 0, 23, 24, 3, 4, 2, 0, 24, 25, 5, 7, 0, 0, 25, 26, 5, 3, 0, 0, 26,
+		28, 1, 0, 0, 0, 27, 11, 1, 0, 0, 0, 27, 16, 1, 0, 0, 0, 27, 21, 1, 0, 0,
+		0, 28, 3, 1, 0, 0, 0, 29, 30, 6, 2, -1, 0, 30, 37, 5, 13, 0, 0, 31, 37,
+		5, 12, 0, 0, 32, 33, 5, 6, 0, 0, 33, 34, 3, 4, 2, 0, 34, 35, 5, 7, 0, 0,
+		35, 37, 1, 0, 0, 0, 36, 29, 1, 0, 0, 0, 36, 31, 1, 0, 0, 0, 36, 32, 1,
+		0, 0, 0, 37, 46, 1, 0, 0, 0, 38, 39, 10, 5, 0, 0, 39, 40, 7, 0, 0, 0, 40,
+		45, 3, 4, 2, 6, 41, 42, 10, 4, 0, 0, 42, 43, 7, 1, 0, 0, 43, 45, 3, 4,
+		2, 5, 44, 38, 1, 0, 0, 0, 44, 41, 1, 0, 0, 0, 45, 48, 1, 0, 0, 0, 46, 44,
+		1, 0, 0, 0, 46, 47, 1, 0, 0, 0, 47, 5, 1, 0, 0, 0, 48, 46, 1, 0, 0, 0,
+		5, 9, 27, 36, 44, 46,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -99,19 +103,22 @@ func NewSimpleLangParser(input antlr.TokenStream) *SimpleLangParser {
 
 // SimpleLangParser tokens.
 const (
-	SimpleLangParserEOF  = antlr.TokenEOF
-	SimpleLangParserT__0 = 1
-	SimpleLangParserT__1 = 2
-	SimpleLangParserT__2 = 3
-	SimpleLangParserT__3 = 4
-	SimpleLangParserT__4 = 5
-	SimpleLangParserT__5 = 6
-	SimpleLangParserT__6 = 7
-	SimpleLangParserT__7 = 8
-	SimpleLangParserT__8 = 9
-	SimpleLangParserID   = 10
-	SimpleLangParserINT  = 11
-	SimpleLangParserWS   = 12
+	SimpleLangParserEOF         = antlr.TokenEOF
+	SimpleLangParserT__0        = 1
+	SimpleLangParserT__1        = 2
+	SimpleLangParserT__2        = 3
+	SimpleLangParserT__3        = 4
+	SimpleLangParserT__4        = 5
+	SimpleLangParserT__5        = 6
+	SimpleLangParserT__6        = 7
+	SimpleLangParserT__7        = 8
+	SimpleLangParserT__8        = 9
+	SimpleLangParserT__9        = 10
+	SimpleLangParserT__10       = 11
+	SimpleLangParserID          = 12
+	SimpleLangParserINT         = 13
+	SimpleLangParserIMPORTNAMES = 14
+	SimpleLangParserWS          = 15
 )
 
 // SimpleLangParser rules.
@@ -252,7 +259,7 @@ func (p *SimpleLangParser) Program() (localctx IProgramContext) {
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = _la == SimpleLangParserT__2 || _la == SimpleLangParserID {
+	for ok := true; ok; ok = ((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&4130) != 0) {
 		{
 			p.SetState(6)
 			p.Statement()
@@ -285,11 +292,6 @@ type IStatementContext interface {
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-
-	// Getter signatures
-	ID() antlr.TerminalNode
-	Expression() IExpressionContext
-
 	// IsStatementContext differentiates from other interfaces.
 	IsStatementContext()
 }
@@ -326,11 +328,41 @@ func NewStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, in
 
 func (s *StatementContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *StatementContext) ID() antlr.TerminalNode {
+func (s *StatementContext) CopyAll(ctx *StatementContext) {
+	s.CopyFrom(&ctx.BaseParserRuleContext)
+}
+
+func (s *StatementContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *StatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+type AssignmentContext struct {
+	StatementContext
+}
+
+func NewAssignmentContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *AssignmentContext {
+	var p = new(AssignmentContext)
+
+	InitEmptyStatementContext(&p.StatementContext)
+	p.parser = parser
+	p.CopyAll(ctx.(*StatementContext))
+
+	return p
+}
+
+func (s *AssignmentContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *AssignmentContext) ID() antlr.TerminalNode {
 	return s.GetToken(SimpleLangParserID, 0)
 }
 
-func (s *StatementContext) Expression() IExpressionContext {
+func (s *AssignmentContext) Expression() IExpressionContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IExpressionContext); ok {
@@ -346,30 +378,122 @@ func (s *StatementContext) Expression() IExpressionContext {
 	return t.(IExpressionContext)
 }
 
-func (s *StatementContext) GetRuleContext() antlr.RuleContext {
+func (s *AssignmentContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleLangListener); ok {
+		listenerT.EnterAssignment(s)
+	}
+}
+
+func (s *AssignmentContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleLangListener); ok {
+		listenerT.ExitAssignment(s)
+	}
+}
+
+func (s *AssignmentContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SimpleLangVisitor:
+		return t.VisitAssignment(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type PrintContext struct {
+	StatementContext
+}
+
+func NewPrintContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *PrintContext {
+	var p = new(PrintContext)
+
+	InitEmptyStatementContext(&p.StatementContext)
+	p.parser = parser
+	p.CopyAll(ctx.(*StatementContext))
+
+	return p
+}
+
+func (s *PrintContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
+func (s *PrintContext) Expression() IExpressionContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExpressionContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionContext)
 }
 
-func (s *StatementContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *PrintContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.EnterStatement(s)
+		listenerT.EnterPrint(s)
 	}
 }
 
-func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *PrintContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.ExitStatement(s)
+		listenerT.ExitPrint(s)
 	}
 }
 
-func (s *StatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *PrintContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SimpleLangVisitor:
-		return t.VisitStatement(s)
+		return t.VisitPrint(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type ImportContext struct {
+	StatementContext
+}
+
+func NewImportContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ImportContext {
+	var p = new(ImportContext)
+
+	InitEmptyStatementContext(&p.StatementContext)
+	p.parser = parser
+	p.CopyAll(ctx.(*StatementContext))
+
+	return p
+}
+
+func (s *ImportContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ImportContext) IMPORTNAMES() antlr.TerminalNode {
+	return s.GetToken(SimpleLangParserIMPORTNAMES, 0)
+}
+
+func (s *ImportContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleLangListener); ok {
+		listenerT.EnterImport(s)
+	}
+}
+
+func (s *ImportContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleLangListener); ok {
+		listenerT.ExitImport(s)
+	}
+}
+
+func (s *ImportContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SimpleLangVisitor:
+		return t.VisitImport(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -379,25 +503,18 @@ func (s *StatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
 	localctx = NewStatementContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 2, SimpleLangParserRULE_statement)
-	p.SetState(22)
+	p.SetState(27)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 
 	switch p.GetTokenStream().LA(1) {
-	case SimpleLangParserID:
+	case SimpleLangParserT__0:
+		localctx = NewImportContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(11)
-			p.Match(SimpleLangParserID)
-			if p.HasError() {
-				// Recognition error - abort rule
-				goto errorExit
-			}
-		}
-		{
-			p.SetState(12)
 			p.Match(SimpleLangParserT__0)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -405,8 +522,20 @@ func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
 			}
 		}
 		{
+			p.SetState(12)
+			p.Match(SimpleLangParserT__1)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
 			p.SetState(13)
-			p.expression(0)
+			p.Match(SimpleLangParserIMPORTNAMES)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
 		}
 		{
 			p.SetState(14)
@@ -416,12 +545,21 @@ func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
 				goto errorExit
 			}
 		}
+		{
+			p.SetState(15)
+			p.Match(SimpleLangParserT__2)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
 
-	case SimpleLangParserT__2:
+	case SimpleLangParserID:
+		localctx = NewAssignmentContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(16)
-			p.Match(SimpleLangParserT__2)
+			p.Match(SimpleLangParserID)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -441,6 +579,18 @@ func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
 		}
 		{
 			p.SetState(19)
+			p.Match(SimpleLangParserT__2)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+
+	case SimpleLangParserT__4:
+		localctx = NewPrintContext(p, localctx)
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(21)
 			p.Match(SimpleLangParserT__4)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -448,8 +598,28 @@ func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
 			}
 		}
 		{
-			p.SetState(20)
-			p.Match(SimpleLangParserT__1)
+			p.SetState(22)
+			p.Match(SimpleLangParserT__5)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(23)
+			p.expression(0)
+		}
+		{
+			p.SetState(24)
+			p.Match(SimpleLangParserT__6)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(25)
+			p.Match(SimpleLangParserT__2)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -862,7 +1032,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(31)
+	p.SetState(36)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -875,7 +1045,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 		_prevctx = localctx
 
 		{
-			p.SetState(25)
+			p.SetState(30)
 			p.Match(SimpleLangParserINT)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -888,7 +1058,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(26)
+			p.SetState(31)
 			p.Match(SimpleLangParserID)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -896,25 +1066,25 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 			}
 		}
 
-	case SimpleLangParserT__3:
+	case SimpleLangParserT__5:
 		localctx = NewParensContext(p, localctx)
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(27)
-			p.Match(SimpleLangParserT__3)
+			p.SetState(32)
+			p.Match(SimpleLangParserT__5)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
 			}
 		}
 		{
-			p.SetState(28)
+			p.SetState(33)
 			p.expression(0)
 		}
 		{
-			p.SetState(29)
-			p.Match(SimpleLangParserT__4)
+			p.SetState(34)
+			p.Match(SimpleLangParserT__6)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -926,7 +1096,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 		goto errorExit
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(41)
+	p.SetState(46)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -941,7 +1111,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(39)
+			p.SetState(44)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
@@ -951,14 +1121,14 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 			case 1:
 				localctx = NewMulDivContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expression)
-				p.SetState(33)
+				p.SetState(38)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(34)
+					p.SetState(39)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -966,7 +1136,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 
 					_la = p.GetTokenStream().LA(1)
 
-					if !(_la == SimpleLangParserT__5 || _la == SimpleLangParserT__6) {
+					if !(_la == SimpleLangParserT__7 || _la == SimpleLangParserT__8) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
 						localctx.(*MulDivContext).op = _ri
@@ -976,21 +1146,21 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(35)
+					p.SetState(40)
 					p.expression(6)
 				}
 
 			case 2:
 				localctx = NewAddSubContext(p, NewExpressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expression)
-				p.SetState(36)
+				p.SetState(41)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 4)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(37)
+					p.SetState(42)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -998,7 +1168,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 
 					_la = p.GetTokenStream().LA(1)
 
-					if !(_la == SimpleLangParserT__7 || _la == SimpleLangParserT__8) {
+					if !(_la == SimpleLangParserT__9 || _la == SimpleLangParserT__10) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
 						localctx.(*AddSubContext).op = _ri
@@ -1008,7 +1178,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(38)
+					p.SetState(43)
 					p.expression(5)
 				}
 
@@ -1017,7 +1187,7 @@ func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 			}
 
 		}
-		p.SetState(43)
+		p.SetState(48)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit

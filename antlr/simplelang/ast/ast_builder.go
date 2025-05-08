@@ -18,16 +18,33 @@ func (v *ASTBuilder) VisitProgram(ctx *parser.ProgramContext) interface{} {
 	return stats
 }
 
-func (v *ASTBuilder) VisitStatement(ctx *parser.StatementContext) interface{} {
-	if ctx.ID() == nil { // print statement
-		expr := ctx.Expression().Accept(v).(Expression)
-		return Print{Expr: expr}
-	}
+func (v *ASTBuilder) VisitImport(ctx *parser.ImportContext) interface{} {
+	name := ctx.IMPORTNAMES().GetText()
+	return Import{Name: name}
+}
+
+func (v *ASTBuilder) VisitAssignment(ctx *parser.AssignmentContext) interface{} {
 	name := ctx.ID().GetText()
 	name = name[1:] // Remove the leading '$'
 	expr := ctx.Expression().Accept(v).(Expression)
 	return Assign{Name: name, Expr: expr}
 }
+
+func (v *ASTBuilder) VisitPrint(ctx *parser.PrintContext) interface{} {
+	expr := ctx.Expression().Accept(v).(Expression)
+	return Print{Expr: expr}
+}
+
+// func (v *ASTBuilder) VisitStatement(ctx *parser.StatementContext) interface{} {
+// 	if ctx.ID() == nil { // print statement
+// 		expr := ctx.Expression().Accept(v).(Expression)
+// 		return Print{Expr: expr}
+// 	}
+// 	name := ctx.ID().GetText()
+// 	name = name[1:] // Remove the leading '$'
+// 	expr := ctx.Expression().Accept(v).(Expression)
+// 	return Assign{Name: name, Expr: expr}
+// }
 
 func (v *ASTBuilder) VisitInt(ctx *parser.IntContext) interface{} {
 	val, _ := strconv.Atoi(ctx.INT().GetText())

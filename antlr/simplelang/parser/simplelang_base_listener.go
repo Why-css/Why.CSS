@@ -27,11 +27,23 @@ func (s *BaseSimpleLangListener) EnterProgram(ctx *ProgramContext) {}
 // ExitProgram is called when production program is exited.
 func (s *BaseSimpleLangListener) ExitProgram(ctx *ProgramContext) {}
 
-// EnterStatement is called when production statement is entered.
-func (s *BaseSimpleLangListener) EnterStatement(ctx *StatementContext) {}
+// EnterImport is called when production Import is entered.
+func (s *BaseSimpleLangListener) EnterImport(ctx *ImportContext) {}
 
-// ExitStatement is called when production statement is exited.
-func (s *BaseSimpleLangListener) ExitStatement(ctx *StatementContext) {}
+// ExitImport is called when production Import is exited.
+func (s *BaseSimpleLangListener) ExitImport(ctx *ImportContext) {}
+
+// EnterAssignment is called when production Assignment is entered.
+func (s *BaseSimpleLangListener) EnterAssignment(ctx *AssignmentContext) {}
+
+// ExitAssignment is called when production Assignment is exited.
+func (s *BaseSimpleLangListener) ExitAssignment(ctx *AssignmentContext) {}
+
+// EnterPrint is called when production Print is entered.
+func (s *BaseSimpleLangListener) EnterPrint(ctx *PrintContext) {}
+
+// ExitPrint is called when production Print is exited.
+func (s *BaseSimpleLangListener) ExitPrint(ctx *PrintContext) {}
 
 // EnterMulDiv is called when production MulDiv is entered.
 func (s *BaseSimpleLangListener) EnterMulDiv(ctx *MulDivContext) {}

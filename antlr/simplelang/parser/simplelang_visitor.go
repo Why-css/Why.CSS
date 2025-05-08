@@ -11,8 +11,14 @@ type SimpleLangVisitor interface {
 	// Visit a parse tree produced by SimpleLangParser#program.
 	VisitProgram(ctx *ProgramContext) interface{}
 
-	// Visit a parse tree produced by SimpleLangParser#statement.
-	VisitStatement(ctx *StatementContext) interface{}
+	// Visit a parse tree produced by SimpleLangParser#Import.
+	VisitImport(ctx *ImportContext) interface{}
+
+	// Visit a parse tree produced by SimpleLangParser#Assignment.
+	VisitAssignment(ctx *AssignmentContext) interface{}
+
+	// Visit a parse tree produced by SimpleLangParser#Print.
+	VisitPrint(ctx *PrintContext) interface{}
 
 	// Visit a parse tree produced by SimpleLangParser#MulDiv.
 	VisitMulDiv(ctx *MulDivContext) interface{}

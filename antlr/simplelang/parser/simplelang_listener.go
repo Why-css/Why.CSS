@@ -11,8 +11,14 @@ type SimpleLangListener interface {
 	// EnterProgram is called when entering the program production.
 	EnterProgram(c *ProgramContext)
 
-	// EnterStatement is called when entering the statement production.
-	EnterStatement(c *StatementContext)
+	// EnterImport is called when entering the Import production.
+	EnterImport(c *ImportContext)
+
+	// EnterAssignment is called when entering the Assignment production.
+	EnterAssignment(c *AssignmentContext)
+
+	// EnterPrint is called when entering the Print production.
+	EnterPrint(c *PrintContext)
 
 	// EnterMulDiv is called when entering the MulDiv production.
 	EnterMulDiv(c *MulDivContext)
@@ -32,8 +38,14 @@ type SimpleLangListener interface {
 	// ExitProgram is called when exiting the program production.
 	ExitProgram(c *ProgramContext)
 
-	// ExitStatement is called when exiting the statement production.
-	ExitStatement(c *StatementContext)
+	// ExitImport is called when exiting the Import production.
+	ExitImport(c *ImportContext)
+
+	// ExitAssignment is called when exiting the Assignment production.
+	ExitAssignment(c *AssignmentContext)
+
+	// ExitPrint is called when exiting the Print production.
+	ExitPrint(c *PrintContext)
 
 	// ExitMulDiv is called when exiting the MulDiv production.
 	ExitMulDiv(c *MulDivContext)

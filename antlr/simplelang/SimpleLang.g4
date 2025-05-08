@@ -3,8 +3,9 @@ grammar SimpleLang;
 program: statement+;
 
 statement:
-	ID '=' expression ';'
-	| 'print' '(' expression ')' ';';
+	'@use' '"' IMPORTNAMES '"' ';'		# Import
+	| ID '=' expression ';'				# Assignment
+	| 'print' '(' expression ')' ';'	# Print;
 
 expression:
 	expression op = ('*' | '/') expression		# MulDiv
@@ -15,4 +16,5 @@ expression:
 
 ID: [$][a-zA-Z_][a-zA-Z_0-9]*;
 INT: [0-9]+;
+IMPORTNAMES: [a-zA-Z_][a-zA-Z_0-9]*;
 WS: [ \t\r\n]+ -> skip;

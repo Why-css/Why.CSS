@@ -26,3 +26,7 @@ type Print struct {
 }
 
 type Statement interface{}
+
+type Import struct {
+	Name string
+}

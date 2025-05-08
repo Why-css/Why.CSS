@@ -12,7 +12,15 @@ func (v *BaseSimpleLangVisitor) VisitProgram(ctx *ProgramContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSimpleLangVisitor) VisitStatement(ctx *StatementContext) interface{} {
+func (v *BaseSimpleLangVisitor) VisitImport(ctx *ImportContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSimpleLangVisitor) VisitAssignment(ctx *AssignmentContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSimpleLangVisitor) VisitPrint(ctx *PrintContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
