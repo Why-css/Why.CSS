@@ -35,17 +35,6 @@ func (v *ASTBuilder) VisitPrint(ctx *parser.PrintContext) interface{} {
 	return Print{Expr: expr}
 }
 
-// func (v *ASTBuilder) VisitStatement(ctx *parser.StatementContext) interface{} {
-// 	if ctx.ID() == nil { // print statement
-// 		expr := ctx.Expression().Accept(v).(Expression)
-// 		return Print{Expr: expr}
-// 	}
-// 	name := ctx.ID().GetText()
-// 	name = name[1:] // Remove the leading '$'
-// 	expr := ctx.Expression().Accept(v).(Expression)
-// 	return Assign{Name: name, Expr: expr}
-// }
-
 func (v *ASTBuilder) VisitInt(ctx *parser.IntContext) interface{} {
 	val, _ := strconv.Atoi(ctx.INT().GetText())
 	return IntLiteral{Value: val}
