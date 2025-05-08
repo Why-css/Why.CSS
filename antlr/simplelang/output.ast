@@ -1,0 +1,21 @@
+# input is "a = 3; b = 6; print(a + b);"
+
+# output is:
+
+[]main.Stat{
+  main.Assign{
+    Name:"a", 
+    Expr:main.IntLiteral{Value:3}
+  }, 
+  main.Assign{
+    Name:"b", 
+    Expr:main.IntLiteral{Value:6}
+  }, 
+  main.Print{
+    Expr:main.BinOp{
+      Left:main.VarRef{Name:"a"},
+      Op:"+",
+      Right:main.VarRef{Name:"b"}
+    }
+  }
+}
