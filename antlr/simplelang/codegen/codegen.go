@@ -7,7 +7,7 @@ import (
 )
 
 // GenerateGoCode takes a list of Stat nodes and returns Go code as a string.
-func GenerateGoCode(stats []ast.Stat) string {
+func GenerateGoCode(stats []ast.Statement) string {
 	var b strings.Builder
 	b.WriteString("package main\n\nimport \"fmt\"\n\nfunc main() {\n")
 	for _, stat := range stats {
@@ -19,7 +19,7 @@ func GenerateGoCode(stats []ast.Stat) string {
 	return b.String()
 }
 
-func genStat(stat ast.Stat) string {
+func genStat(stat ast.Statement) string {
 	switch s := stat.(type) {
 	case ast.Assign:
 		return fmt.Sprintf("%s := %s", s.Name, genExpr(s.Expr))
@@ -30,7 +30,7 @@ func genStat(stat ast.Stat) string {
 	}
 }
 
-func genExpr(expr ast.Expr) string {
+func genExpr(expr ast.Expression) string {
 	switch e := expr.(type) {
 	case ast.IntLiteral:
 		return fmt.Sprintf("%d", e.Value)

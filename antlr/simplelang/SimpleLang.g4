@@ -1,18 +1,18 @@
 grammar SimpleLang;
 
-prog:   stat+ ;
+program: statement+;
 
-stat:   ID '=' expr ';'
-    |   'print' '(' expr ')' ';'
-    ;
+statement:
+	ID '=' expression ';'
+	| 'print' '(' expression ')' ';';
 
-expr:   expr op=('*'|'/') expr   # MulDiv
-    |   expr op=('+'|'-') expr   # AddSub
-    |   INT                      # Int
-    |   ID                       # Id
-    |   '(' expr ')'             # Parens
-    ;
+expression:
+	expression op = ('*' | '/') expression		# MulDiv
+	| expression op = ('+' | '-') expression	# AddSub
+	| INT										# Int
+	| ID										# Id
+	| '(' expression ')'						# Parens;
 
-ID  :   [a-zA-Z_][a-zA-Z_0-9]* ;
-INT :   [0-9]+ ;
-WS  :   [ \t\r\n]+ -> skip ;
+ID: [$][a-zA-Z_][a-zA-Z_0-9]*;
+INT: [0-9]+;
+WS: [ \t\r\n]+ -> skip;

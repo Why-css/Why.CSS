@@ -17,13 +17,13 @@ func main() {
 	lexer := parser.NewSimpleLangLexer(input)
 	stream := antlr.NewCommonTokenStream(lexer, 0)
 	p := parser.NewSimpleLangParser(stream)
-	tree := p.Prog()
+	tree := p.Program()
 
 	builtAst := tree.Accept(&ast.ASTBuilder{})
 	fmt.Printf("%#v\n", builtAst)
 
 	// Generate Go code
-	goCode := codegen.GenerateGoCode(builtAst.([]ast.Stat))
+	goCode := codegen.GenerateGoCode(builtAst.([]ast.Statement))
 	err := os.MkdirAll("./generated", os.ModePerm)
 	if err != nil {
 		fmt.Println("Error creating directory:", err)

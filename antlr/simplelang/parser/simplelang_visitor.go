@@ -8,11 +8,11 @@ import "github.com/antlr4-go/antlr/v4"
 type SimpleLangVisitor interface {
 	antlr.ParseTreeVisitor
 
-	// Visit a parse tree produced by SimpleLangParser#prog.
-	VisitProg(ctx *ProgContext) interface{}
+	// Visit a parse tree produced by SimpleLangParser#program.
+	VisitProgram(ctx *ProgramContext) interface{}
 
-	// Visit a parse tree produced by SimpleLangParser#stat.
-	VisitStat(ctx *StatContext) interface{}
+	// Visit a parse tree produced by SimpleLangParser#statement.
+	VisitStatement(ctx *StatementContext) interface{}
 
 	// Visit a parse tree produced by SimpleLangParser#MulDiv.
 	VisitMulDiv(ctx *MulDivContext) interface{}

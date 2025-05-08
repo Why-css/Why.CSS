@@ -21,17 +21,17 @@ func (s *BaseSimpleLangListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseSimpleLangListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
-// EnterProg is called when production prog is entered.
-func (s *BaseSimpleLangListener) EnterProg(ctx *ProgContext) {}
+// EnterProgram is called when production program is entered.
+func (s *BaseSimpleLangListener) EnterProgram(ctx *ProgramContext) {}
 
-// ExitProg is called when production prog is exited.
-func (s *BaseSimpleLangListener) ExitProg(ctx *ProgContext) {}
+// ExitProgram is called when production program is exited.
+func (s *BaseSimpleLangListener) ExitProgram(ctx *ProgramContext) {}
 
-// EnterStat is called when production stat is entered.
-func (s *BaseSimpleLangListener) EnterStat(ctx *StatContext) {}
+// EnterStatement is called when production statement is entered.
+func (s *BaseSimpleLangListener) EnterStatement(ctx *StatementContext) {}
 
-// ExitStat is called when production stat is exited.
-func (s *BaseSimpleLangListener) ExitStat(ctx *StatContext) {}
+// ExitStatement is called when production statement is exited.
+func (s *BaseSimpleLangListener) ExitStatement(ctx *StatementContext) {}
 
 // EnterMulDiv is called when production MulDiv is entered.
 func (s *BaseSimpleLangListener) EnterMulDiv(ctx *MulDivContext) {}

@@ -8,11 +8,11 @@ import "github.com/antlr4-go/antlr/v4"
 type SimpleLangListener interface {
 	antlr.ParseTreeListener
 
-	// EnterProg is called when entering the prog production.
-	EnterProg(c *ProgContext)
+	// EnterProgram is called when entering the program production.
+	EnterProgram(c *ProgramContext)
 
-	// EnterStat is called when entering the stat production.
-	EnterStat(c *StatContext)
+	// EnterStatement is called when entering the statement production.
+	EnterStatement(c *StatementContext)
 
 	// EnterMulDiv is called when entering the MulDiv production.
 	EnterMulDiv(c *MulDivContext)
@@ -29,11 +29,11 @@ type SimpleLangListener interface {
 	// EnterInt is called when entering the Int production.
 	EnterInt(c *IntContext)
 
-	// ExitProg is called when exiting the prog production.
-	ExitProg(c *ProgContext)
+	// ExitProgram is called when exiting the program production.
+	ExitProgram(c *ProgramContext)
 
-	// ExitStat is called when exiting the stat production.
-	ExitStat(c *StatContext)
+	// ExitStatement is called when exiting the statement production.
+	ExitStatement(c *StatementContext)
 
 	// ExitMulDiv is called when exiting the MulDiv production.
 	ExitMulDiv(c *MulDivContext)

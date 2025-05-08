@@ -8,11 +8,11 @@ type BaseSimpleLangVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
-func (v *BaseSimpleLangVisitor) VisitProg(ctx *ProgContext) interface{} {
+func (v *BaseSimpleLangVisitor) VisitProgram(ctx *ProgramContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSimpleLangVisitor) VisitStat(ctx *StatContext) interface{} {
+func (v *BaseSimpleLangVisitor) VisitStatement(ctx *StatementContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

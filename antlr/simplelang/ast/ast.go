@@ -1,6 +1,6 @@
 package ast
 
-type Expr interface{}
+type Expression interface{}
 
 type IntLiteral struct {
 	Value int
@@ -11,18 +11,18 @@ type VarRef struct {
 }
 
 type BinOp struct {
-	Left  Expr
+	Left  Expression
 	Op    string
-	Right Expr
+	Right Expression
 }
 
 type Assign struct {
 	Name string
-	Expr Expr
+	Expr Expression
 }
 
 type Print struct {
-	Expr Expr
+	Expr Expression
 }
 
-type Stat interface{}
+type Statement interface{}

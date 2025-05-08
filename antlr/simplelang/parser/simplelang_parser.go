@@ -39,7 +39,7 @@ func simplelangParserInit() {
 		"", "", "", "", "", "", "", "", "", "", "ID", "INT", "WS",
 	}
 	staticData.RuleNames = []string{
-		"prog", "stat", "expr",
+		"program", "statement", "expression",
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
@@ -116,72 +116,72 @@ const (
 
 // SimpleLangParser rules.
 const (
-	SimpleLangParserRULE_prog = 0
-	SimpleLangParserRULE_stat = 1
-	SimpleLangParserRULE_expr = 2
+	SimpleLangParserRULE_program    = 0
+	SimpleLangParserRULE_statement  = 1
+	SimpleLangParserRULE_expression = 2
 )
 
-// IProgContext is an interface to support dynamic dispatch.
-type IProgContext interface {
+// IProgramContext is an interface to support dynamic dispatch.
+type IProgramContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
 	// Getter signatures
-	AllStat() []IStatContext
-	Stat(i int) IStatContext
+	AllStatement() []IStatementContext
+	Statement(i int) IStatementContext
 
-	// IsProgContext differentiates from other interfaces.
-	IsProgContext()
+	// IsProgramContext differentiates from other interfaces.
+	IsProgramContext()
 }
 
-type ProgContext struct {
+type ProgramContext struct {
 	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyProgContext() *ProgContext {
-	var p = new(ProgContext)
+func NewEmptyProgramContext() *ProgramContext {
+	var p = new(ProgramContext)
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_prog
+	p.RuleIndex = SimpleLangParserRULE_program
 	return p
 }
 
-func InitEmptyProgContext(p *ProgContext) {
+func InitEmptyProgramContext(p *ProgramContext) {
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_prog
+	p.RuleIndex = SimpleLangParserRULE_program
 }
 
-func (*ProgContext) IsProgContext() {}
+func (*ProgramContext) IsProgramContext() {}
 
-func NewProgContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ProgContext {
-	var p = new(ProgContext)
+func NewProgramContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ProgramContext {
+	var p = new(ProgramContext)
 
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SimpleLangParserRULE_prog
+	p.RuleIndex = SimpleLangParserRULE_program
 
 	return p
 }
 
-func (s *ProgContext) GetParser() antlr.Parser { return s.parser }
+func (s *ProgramContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ProgContext) AllStat() []IStatContext {
+func (s *ProgramContext) AllStatement() []IStatementContext {
 	children := s.GetChildren()
 	len := 0
 	for _, ctx := range children {
-		if _, ok := ctx.(IStatContext); ok {
+		if _, ok := ctx.(IStatementContext); ok {
 			len++
 		}
 	}
 
-	tst := make([]IStatContext, len)
+	tst := make([]IStatementContext, len)
 	i := 0
 	for _, ctx := range children {
-		if t, ok := ctx.(IStatContext); ok {
-			tst[i] = t.(IStatContext)
+		if t, ok := ctx.(IStatementContext); ok {
+			tst[i] = t.(IStatementContext)
 			i++
 		}
 	}
@@ -189,11 +189,11 @@ func (s *ProgContext) AllStat() []IStatContext {
 	return tst
 }
 
-func (s *ProgContext) Stat(i int) IStatContext {
+func (s *ProgramContext) Statement(i int) IStatementContext {
 	var t antlr.RuleContext
 	j := 0
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IStatContext); ok {
+		if _, ok := ctx.(IStatementContext); ok {
 			if j == i {
 				t = ctx.(antlr.RuleContext)
 				break
@@ -206,42 +206,42 @@ func (s *ProgContext) Stat(i int) IStatContext {
 		return nil
 	}
 
-	return t.(IStatContext)
+	return t.(IStatementContext)
 }
 
-func (s *ProgContext) GetRuleContext() antlr.RuleContext {
+func (s *ProgramContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *ProgContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *ProgramContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ProgContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *ProgramContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.EnterProg(s)
+		listenerT.EnterProgram(s)
 	}
 }
 
-func (s *ProgContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *ProgramContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.ExitProg(s)
+		listenerT.ExitProgram(s)
 	}
 }
 
-func (s *ProgContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *ProgramContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SimpleLangVisitor:
-		return t.VisitProg(s)
+		return t.VisitProgram(s)
 
 	default:
 		return t.VisitChildren(s)
 	}
 }
 
-func (p *SimpleLangParser) Prog() (localctx IProgContext) {
-	localctx = NewProgContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 0, SimpleLangParserRULE_prog)
+func (p *SimpleLangParser) Program() (localctx IProgramContext) {
+	localctx = NewProgramContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 0, SimpleLangParserRULE_program)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
@@ -255,7 +255,7 @@ func (p *SimpleLangParser) Prog() (localctx IProgContext) {
 	for ok := true; ok; ok = _la == SimpleLangParserT__2 || _la == SimpleLangParserID {
 		{
 			p.SetState(6)
-			p.Stat()
+			p.Statement()
 		}
 
 		p.SetState(9)
@@ -279,8 +279,8 @@ errorExit:
 	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
-// IStatContext is an interface to support dynamic dispatch.
-type IStatContext interface {
+// IStatementContext is an interface to support dynamic dispatch.
+type IStatementContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
@@ -288,52 +288,52 @@ type IStatContext interface {
 
 	// Getter signatures
 	ID() antlr.TerminalNode
-	Expr() IExprContext
+	Expression() IExpressionContext
 
-	// IsStatContext differentiates from other interfaces.
-	IsStatContext()
+	// IsStatementContext differentiates from other interfaces.
+	IsStatementContext()
 }
 
-type StatContext struct {
+type StatementContext struct {
 	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyStatContext() *StatContext {
-	var p = new(StatContext)
+func NewEmptyStatementContext() *StatementContext {
+	var p = new(StatementContext)
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_stat
+	p.RuleIndex = SimpleLangParserRULE_statement
 	return p
 }
 
-func InitEmptyStatContext(p *StatContext) {
+func InitEmptyStatementContext(p *StatementContext) {
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_stat
+	p.RuleIndex = SimpleLangParserRULE_statement
 }
 
-func (*StatContext) IsStatContext() {}
+func (*StatementContext) IsStatementContext() {}
 
-func NewStatContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StatContext {
-	var p = new(StatContext)
+func NewStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StatementContext {
+	var p = new(StatementContext)
 
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SimpleLangParserRULE_stat
+	p.RuleIndex = SimpleLangParserRULE_statement
 
 	return p
 }
 
-func (s *StatContext) GetParser() antlr.Parser { return s.parser }
+func (s *StatementContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *StatContext) ID() antlr.TerminalNode {
+func (s *StatementContext) ID() antlr.TerminalNode {
 	return s.GetToken(SimpleLangParserID, 0)
 }
 
-func (s *StatContext) Expr() IExprContext {
+func (s *StatementContext) Expression() IExpressionContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			t = ctx.(antlr.RuleContext)
 			break
 		}
@@ -343,42 +343,42 @@ func (s *StatContext) Expr() IExprContext {
 		return nil
 	}
 
-	return t.(IExprContext)
+	return t.(IExpressionContext)
 }
 
-func (s *StatContext) GetRuleContext() antlr.RuleContext {
+func (s *StatementContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StatContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *StatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *StatContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *StatementContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.EnterStat(s)
+		listenerT.EnterStatement(s)
 	}
 }
 
-func (s *StatContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SimpleLangListener); ok {
-		listenerT.ExitStat(s)
+		listenerT.ExitStatement(s)
 	}
 }
 
-func (s *StatContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *StatementContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SimpleLangVisitor:
-		return t.VisitStat(s)
+		return t.VisitStatement(s)
 
 	default:
 		return t.VisitChildren(s)
 	}
 }
 
-func (p *SimpleLangParser) Stat() (localctx IStatContext) {
-	localctx = NewStatContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 2, SimpleLangParserRULE_stat)
+func (p *SimpleLangParser) Statement() (localctx IStatementContext) {
+	localctx = NewStatementContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 2, SimpleLangParserRULE_statement)
 	p.SetState(22)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
@@ -406,7 +406,7 @@ func (p *SimpleLangParser) Stat() (localctx IStatContext) {
 		}
 		{
 			p.SetState(13)
-			p.expr(0)
+			p.expression(0)
 		}
 		{
 			p.SetState(14)
@@ -437,7 +437,7 @@ func (p *SimpleLangParser) Stat() (localctx IStatContext) {
 		}
 		{
 			p.SetState(18)
-			p.expr(0)
+			p.expression(0)
 		}
 		{
 			p.SetState(19)
@@ -474,71 +474,71 @@ errorExit:
 	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
-// IExprContext is an interface to support dynamic dispatch.
-type IExprContext interface {
+// IExpressionContext is an interface to support dynamic dispatch.
+type IExpressionContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-	// IsExprContext differentiates from other interfaces.
-	IsExprContext()
+	// IsExpressionContext differentiates from other interfaces.
+	IsExpressionContext()
 }
 
-type ExprContext struct {
+type ExpressionContext struct {
 	antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyExprContext() *ExprContext {
-	var p = new(ExprContext)
+func NewEmptyExpressionContext() *ExpressionContext {
+	var p = new(ExpressionContext)
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_expr
+	p.RuleIndex = SimpleLangParserRULE_expression
 	return p
 }
 
-func InitEmptyExprContext(p *ExprContext) {
+func InitEmptyExpressionContext(p *ExpressionContext) {
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
-	p.RuleIndex = SimpleLangParserRULE_expr
+	p.RuleIndex = SimpleLangParserRULE_expression
 }
 
-func (*ExprContext) IsExprContext() {}
+func (*ExpressionContext) IsExpressionContext() {}
 
-func NewExprContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExprContext {
-	var p = new(ExprContext)
+func NewExpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExpressionContext {
+	var p = new(ExpressionContext)
 
 	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SimpleLangParserRULE_expr
+	p.RuleIndex = SimpleLangParserRULE_expression
 
 	return p
 }
 
-func (s *ExprContext) GetParser() antlr.Parser { return s.parser }
+func (s *ExpressionContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ExprContext) CopyAll(ctx *ExprContext) {
+func (s *ExpressionContext) CopyAll(ctx *ExpressionContext) {
 	s.CopyFrom(&ctx.BaseParserRuleContext)
 }
 
-func (s *ExprContext) GetRuleContext() antlr.RuleContext {
+func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *ExprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *ExpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
 type MulDivContext struct {
-	ExprContext
+	ExpressionContext
 	op antlr.Token
 }
 
 func NewMulDivContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *MulDivContext {
 	var p = new(MulDivContext)
 
-	InitEmptyExprContext(&p.ExprContext)
+	InitEmptyExpressionContext(&p.ExpressionContext)
 	p.parser = parser
-	p.CopyAll(ctx.(*ExprContext))
+	p.CopyAll(ctx.(*ExpressionContext))
 
 	return p
 }
@@ -551,20 +551,20 @@ func (s *MulDivContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *MulDivContext) AllExpr() []IExprContext {
+func (s *MulDivContext) AllExpression() []IExpressionContext {
 	children := s.GetChildren()
 	len := 0
 	for _, ctx := range children {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			len++
 		}
 	}
 
-	tst := make([]IExprContext, len)
+	tst := make([]IExpressionContext, len)
 	i := 0
 	for _, ctx := range children {
-		if t, ok := ctx.(IExprContext); ok {
-			tst[i] = t.(IExprContext)
+		if t, ok := ctx.(IExpressionContext); ok {
+			tst[i] = t.(IExpressionContext)
 			i++
 		}
 	}
@@ -572,11 +572,11 @@ func (s *MulDivContext) AllExpr() []IExprContext {
 	return tst
 }
 
-func (s *MulDivContext) Expr(i int) IExprContext {
+func (s *MulDivContext) Expression(i int) IExpressionContext {
 	var t antlr.RuleContext
 	j := 0
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			if j == i {
 				t = ctx.(antlr.RuleContext)
 				break
@@ -589,7 +589,7 @@ func (s *MulDivContext) Expr(i int) IExprContext {
 		return nil
 	}
 
-	return t.(IExprContext)
+	return t.(IExpressionContext)
 }
 
 func (s *MulDivContext) EnterRule(listener antlr.ParseTreeListener) {
@@ -615,16 +615,16 @@ func (s *MulDivContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 }
 
 type AddSubContext struct {
-	ExprContext
+	ExpressionContext
 	op antlr.Token
 }
 
 func NewAddSubContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *AddSubContext {
 	var p = new(AddSubContext)
 
-	InitEmptyExprContext(&p.ExprContext)
+	InitEmptyExpressionContext(&p.ExpressionContext)
 	p.parser = parser
-	p.CopyAll(ctx.(*ExprContext))
+	p.CopyAll(ctx.(*ExpressionContext))
 
 	return p
 }
@@ -637,20 +637,20 @@ func (s *AddSubContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *AddSubContext) AllExpr() []IExprContext {
+func (s *AddSubContext) AllExpression() []IExpressionContext {
 	children := s.GetChildren()
 	len := 0
 	for _, ctx := range children {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			len++
 		}
 	}
 
-	tst := make([]IExprContext, len)
+	tst := make([]IExpressionContext, len)
 	i := 0
 	for _, ctx := range children {
-		if t, ok := ctx.(IExprContext); ok {
-			tst[i] = t.(IExprContext)
+		if t, ok := ctx.(IExpressionContext); ok {
+			tst[i] = t.(IExpressionContext)
 			i++
 		}
 	}
@@ -658,11 +658,11 @@ func (s *AddSubContext) AllExpr() []IExprContext {
 	return tst
 }
 
-func (s *AddSubContext) Expr(i int) IExprContext {
+func (s *AddSubContext) Expression(i int) IExpressionContext {
 	var t antlr.RuleContext
 	j := 0
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			if j == i {
 				t = ctx.(antlr.RuleContext)
 				break
@@ -675,7 +675,7 @@ func (s *AddSubContext) Expr(i int) IExprContext {
 		return nil
 	}
 
-	return t.(IExprContext)
+	return t.(IExpressionContext)
 }
 
 func (s *AddSubContext) EnterRule(listener antlr.ParseTreeListener) {
@@ -701,15 +701,15 @@ func (s *AddSubContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 }
 
 type ParensContext struct {
-	ExprContext
+	ExpressionContext
 }
 
 func NewParensContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ParensContext {
 	var p = new(ParensContext)
 
-	InitEmptyExprContext(&p.ExprContext)
+	InitEmptyExpressionContext(&p.ExpressionContext)
 	p.parser = parser
-	p.CopyAll(ctx.(*ExprContext))
+	p.CopyAll(ctx.(*ExpressionContext))
 
 	return p
 }
@@ -718,10 +718,10 @@ func (s *ParensContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *ParensContext) Expr() IExprContext {
+func (s *ParensContext) Expression() IExpressionContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IExpressionContext); ok {
 			t = ctx.(antlr.RuleContext)
 			break
 		}
@@ -731,7 +731,7 @@ func (s *ParensContext) Expr() IExprContext {
 		return nil
 	}
 
-	return t.(IExprContext)
+	return t.(IExpressionContext)
 }
 
 func (s *ParensContext) EnterRule(listener antlr.ParseTreeListener) {
@@ -757,15 +757,15 @@ func (s *ParensContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 }
 
 type IdContext struct {
-	ExprContext
+	ExpressionContext
 }
 
 func NewIdContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IdContext {
 	var p = new(IdContext)
 
-	InitEmptyExprContext(&p.ExprContext)
+	InitEmptyExpressionContext(&p.ExpressionContext)
 	p.parser = parser
-	p.CopyAll(ctx.(*ExprContext))
+	p.CopyAll(ctx.(*ExpressionContext))
 
 	return p
 }
@@ -801,15 +801,15 @@ func (s *IdContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 }
 
 type IntContext struct {
-	ExprContext
+	ExpressionContext
 }
 
 func NewIntContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IntContext {
 	var p = new(IntContext)
 
-	InitEmptyExprContext(&p.ExprContext)
+	InitEmptyExpressionContext(&p.ExpressionContext)
 	p.parser = parser
-	p.CopyAll(ctx.(*ExprContext))
+	p.CopyAll(ctx.(*ExpressionContext))
 
 	return p
 }
@@ -844,19 +844,19 @@ func (s *IntContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-func (p *SimpleLangParser) Expr() (localctx IExprContext) {
-	return p.expr(0)
+func (p *SimpleLangParser) Expression() (localctx IExpressionContext) {
+	return p.expression(0)
 }
 
-func (p *SimpleLangParser) expr(_p int) (localctx IExprContext) {
+func (p *SimpleLangParser) expression(_p int) (localctx IExpressionContext) {
 	var _parentctx antlr.ParserRuleContext = p.GetParserRuleContext()
 
 	_parentState := p.GetState()
-	localctx = NewExprContext(p, p.GetParserRuleContext(), _parentState)
-	var _prevctx IExprContext = localctx
+	localctx = NewExpressionContext(p, p.GetParserRuleContext(), _parentState)
+	var _prevctx IExpressionContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
 	_startState := 4
-	p.EnterRecursionRule(localctx, 4, SimpleLangParserRULE_expr, _p)
+	p.EnterRecursionRule(localctx, 4, SimpleLangParserRULE_expression, _p)
 	var _la int
 
 	var _alt int
@@ -910,7 +910,7 @@ func (p *SimpleLangParser) expr(_p int) (localctx IExprContext) {
 		}
 		{
 			p.SetState(28)
-			p.expr(0)
+			p.expression(0)
 		}
 		{
 			p.SetState(29)
@@ -949,8 +949,8 @@ func (p *SimpleLangParser) expr(_p int) (localctx IExprContext) {
 
 			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 3, p.GetParserRuleContext()) {
 			case 1:
-				localctx = NewMulDivContext(p, NewExprContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expr)
+				localctx = NewMulDivContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expression)
 				p.SetState(33)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
@@ -977,12 +977,12 @@ func (p *SimpleLangParser) expr(_p int) (localctx IExprContext) {
 				}
 				{
 					p.SetState(35)
-					p.expr(6)
+					p.expression(6)
 				}
 
 			case 2:
-				localctx = NewAddSubContext(p, NewExprContext(p, _parentctx, _parentState))
-				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expr)
+				localctx = NewAddSubContext(p, NewExpressionContext(p, _parentctx, _parentState))
+				p.PushNewRecursionContext(localctx, _startState, SimpleLangParserRULE_expression)
 				p.SetState(36)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 4)) {
@@ -1009,7 +1009,7 @@ func (p *SimpleLangParser) expr(_p int) (localctx IExprContext) {
 				}
 				{
 					p.SetState(38)
-					p.expr(5)
+					p.expression(5)
 				}
 
 			case antlr.ATNInvalidAltNumber:
@@ -1044,18 +1044,18 @@ errorExit:
 func (p *SimpleLangParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
 	case 2:
-		var t *ExprContext = nil
+		var t *ExpressionContext = nil
 		if localctx != nil {
-			t = localctx.(*ExprContext)
+			t = localctx.(*ExpressionContext)
 		}
-		return p.Expr_Sempred(t, predIndex)
+		return p.Expression_Sempred(t, predIndex)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(ruleIndex))
 	}
 }
 
-func (p *SimpleLangParser) Expr_Sempred(localctx antlr.RuleContext, predIndex int) bool {
+func (p *SimpleLangParser) Expression_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
 		return p.Precpred(p.GetParserRuleContext(), 5)
